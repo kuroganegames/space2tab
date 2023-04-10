@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="mb-3">
+        <label for="textA" class="form-label">Input Text:</label>
+        <textarea id="textA" class="form-control" rows="6"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="pulldownC" class="form-label">Number of spaces:</label>
+        <select id="pulldownC" class="form-select">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+        </select>
+    </div>
+    <button id="buttonB" class="btn btn-primary mb-3">Execute</button>
+    <div class="mb-3">
+        <label for="textD" class="form-label">Output Text:</label>
+        <textarea id="textD" class="form-control" rows="6"></textarea>
+    </div>
+    <button id="buttonE" class="btn btn-secondary">Copy to Clipboard</button>
+
+    <script>
+        document.getElementById("buttonB").addEventListener("click", tokenSmaller);
+        document.getElementById("buttonE").addEventListener("click", copyToClipboard);
+
+        function tokenSmaller() {
+            const textA = document.getElementById("textA").value;
+            const pulldownC = parseInt(document.getElementById("pulldownC").value);
+
+            const spaces = " ".repeat(pulldownC);
+            const replacedText = textA.replace(new RegExp(spaces, 'g'), "\t");
+
+            document.getElementById("textD").value = replacedText;
+        }
+
+        function copyToClipboard() {
+            const textD = document.getElementById("textD");
+            textD.select();
+            document.execCommand("copy");
+            alert("Copied to clipboard!");
+        }
+    </script>
